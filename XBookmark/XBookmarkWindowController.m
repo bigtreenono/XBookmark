@@ -30,12 +30,14 @@
     self.window.hidesOnDeactivate = YES;
     self.bookmarksTableView.action = @selector(onTableViewClick:);
     
+    [_bookmarksTableView registerForDraggedTypes:@[@"MyPrivateTableViewDataType"]];
+
     [self refreshBookmarks];
     
     [[XBookmarkModel sharedModel] addObserver:self forKeyPath:@"bookmarks" options:NSKeyValueObservingOptionNew context:nil];
 }
 
-- (void)dealloc{
+- (void)dealloc {
     [[XBookmarkModel sharedModel] removeObserver:self forKeyPath:@"bookmarks"];
 }
 
@@ -50,15 +52,56 @@
     if([tableColumn.identifier isEqualToString:@"BookmarkColumn"]){
         XBookmarkEntity *bookmark = [self.bookmarks objectAtIndex:row];
         cellView.titleField.stringValue = [NSString stringWithFormat:@"%@:%lu",[bookmark.sourcePath lastPathComponent],bookmark.lineNumber];
-        cellView.subtitleField.stringValue = bookmark.sourcePath;
+//        cellView.subtitleField.stringValue = bookmark.sourcePath;
     }
     return cellView;
 }
 
--(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return self.bookmarks.count;
 }
 
+- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+    NSLog(@"rowIndexes %@", rowIndexes);
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+    [pboard declareTypes:[NSArray arrayWithObject:@"MyPrivateTableViewDataType"] owner:self];
+    [pboard setData:data forType:@"MyPrivateTableViewDataType"];
+    return YES;
+}
+
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op {
+    // Add code here to validate the drop
+    return NSDragOperationEvery;
+}
+
+- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
+    NSPasteboard *pboard = [info draggingPasteboard];
+    NSData *rowData = [pboard dataForType:@"MyPrivateTableViewDataType"];
+
+    NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
+
+    NSUInteger from = [rowIndexes firstIndex];
+    
+    NSLog(@"row %zd, from %zd, count %zd", row, from, [XBookmarkModel sharedModel].bookmarks.count);
+    if (from > row) {
+        // 从下往上
+        XBookmarkEntity *bookmark = [XBookmarkModel sharedModel].bookmarks[from];
+        [[XBookmarkModel sharedModel] removeBookmark:bookmark.sourcePath lineNumber:bookmark.lineNumber];
+        [[XBookmarkModel sharedModel] insertObject:bookmark inBookmarksAtIndex:row];
+        [[XBookmarkModel sharedModel] saveBookmarks];
+        [self refreshBookmarks];
+    } else {
+        // 从上往下
+        XBookmarkEntity *bookmark = [XBookmarkModel sharedModel].bookmarks[from];
+        [[XBookmarkModel sharedModel] removeBookmark:bookmark.sourcePath lineNumber:bookmark.lineNumber];
+        [[XBookmarkModel sharedModel] insertObject:bookmark inBookmarksAtIndex:row - 1];
+        [[XBookmarkModel sharedModel] saveBookmarks];
+        [self refreshBookmarks];
+    }
+    
+    return YES;
+}
 
 -(void)refreshBookmarks{
     self.bookmarks = [XBookmarkModel sharedModel].bookmarks;

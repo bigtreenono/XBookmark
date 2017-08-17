@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="XBookmarkWindowController">
@@ -15,20 +16,19 @@
         <window title="XBookmark" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="352"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <value key="minSize" type="size" width="400" height="200"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="352"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="37" horizontalPageScroll="10" verticalLineScroll="37" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYV-ro-Pzb">
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYV-ro-Pzb">
                         <rect key="frame" x="0.0" y="37" width="401" height="315"/>
                         <clipView key="contentView" id="Srs-g7-vWE">
                             <rect key="frame" x="0.0" y="0.0" width="401" height="315"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="35" rowSizeStyle="automatic" viewBased="YES" id="wDo-JK-DHS">
-                                    <rect key="frame" x="0.0" y="0.0" width="401" height="0.0"/>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="22" rowSizeStyle="automatic" viewBased="YES" id="wDo-JK-DHS">
+                                    <rect key="frame" x="0.0" y="0.0" width="401" height="315"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,37 +48,25 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Ken-Tm-92n" customClass="XBookmarkTableCellView">
-                                                    <rect key="frame" x="1" y="1" width="398" height="35"/>
+                                                    <rect key="frame" x="1" y="1" width="398" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kwl-Wy-SAM">
-                                                            <rect key="frame" x="1" y="15" width="396" height="17"/>
-                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="SourceFileName.m:100" id="fBJ-yv-8Yj">
-                                                                <font key="font" metaFont="system"/>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwl-Wy-SAM">
+                                                            <rect key="frame" x="1" y="3" width="396" height="16"/>
+                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="SourceFileName.m:100" id="fBJ-yv-8Yj">
+                                                                <font key="font" metaFont="system" size="12"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                        </textField>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6vt-O6-GiC">
-                                                            <rect key="frame" x="3" y="0.0" width="392" height="17"/>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SourceFileAbsoluteFilePath" placeholderString="" id="xmX-7d-1DK">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="knobColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="kwl-Wy-SAM" secondAttribute="trailing" constant="3" id="67l-E0-o2V"/>
-                                                        <constraint firstAttribute="bottom" secondItem="6vt-O6-GiC" secondAttribute="bottom" id="VmI-jy-bEU"/>
-                                                        <constraint firstAttribute="trailing" secondItem="6vt-O6-GiC" secondAttribute="trailing" constant="5" id="YY3-np-yZP"/>
                                                         <constraint firstItem="kwl-Wy-SAM" firstAttribute="leading" secondItem="Ken-Tm-92n" secondAttribute="leading" constant="3" id="Zvm-Rm-fgp"/>
-                                                        <constraint firstItem="6vt-O6-GiC" firstAttribute="leading" secondItem="Ken-Tm-92n" secondAttribute="leading" constant="5" id="ajk-NA-deD"/>
-                                                        <constraint firstItem="6vt-O6-GiC" firstAttribute="top" secondItem="Ken-Tm-92n" secondAttribute="top" constant="18" id="vLv-A1-zkX"/>
+                                                        <constraint firstAttribute="bottom" secondItem="kwl-Wy-SAM" secondAttribute="bottom" constant="3" id="uGd-XL-JWX"/>
                                                         <constraint firstItem="kwl-Wy-SAM" firstAttribute="top" secondItem="Ken-Tm-92n" secondAttribute="top" constant="3" id="zSd-bf-jlR"/>
                                                     </constraints>
                                                     <connections>
-                                                        <outlet property="subtitleField" destination="6vt-O6-GiC" id="2bs-So-BBS"/>
                                                         <outlet property="titleField" destination="kwl-Wy-SAM" id="I3T-9X-PHx"/>
                                                     </connections>
                                                 </tableCellView>
@@ -91,7 +79,6 @@
                                     </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bft-tf-y9S">
                             <rect key="frame" x="1" y="255" width="480" height="16"/>
@@ -102,7 +89,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ITQ-wl-zZE">
+                    <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ITQ-wl-zZE">
                         <rect key="frame" x="2" y="1" width="77" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="kED-VY-BCo"/>
@@ -144,7 +131,7 @@
                             <action selector="clearBookmarkClicked:" target="-2" id="rql-9q-aDF"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-PF-bXo">
+                    <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-PF-bXo">
                         <rect key="frame" x="73" y="3" width="113" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="101" id="JUI-Lr-ThZ"/>

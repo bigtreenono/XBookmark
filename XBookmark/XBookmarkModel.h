@@ -10,6 +10,7 @@
 
 
 @interface XBookmarkEntity : NSObject<NSCoding>
+
 @property (nonatomic,strong) NSString *sourcePath;
 @property (nonatomic,assign) NSUInteger lineNumber;
 @property (nonatomic,strong) NSString *comment;
@@ -24,8 +25,10 @@
 
 @property (nonatomic,strong,readonly) NSMutableArray *bookmarks;
 
--(void)addBookmark:(XBookmarkEntity*)bookmark;
--(void)removeBookmark:(NSString*)sourcePath lineNumber:(NSUInteger)lineNumber;
+- (void)addBookmark:(XBookmarkEntity*)bookmark;
+- (void)removeBookmark:(NSString*)sourcePath lineNumber:(NSUInteger)lineNumber;
+- (void)insertObject:(XBookmarkEntity *)object inBookmarksAtIndex:(NSUInteger)index;
+
 -(BOOL)hasBookmark:(NSString*)sourcePath lineNumber:(NSUInteger)lineNumber;
 -(void)clearBookmarks;
 

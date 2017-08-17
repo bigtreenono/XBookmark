@@ -147,7 +147,7 @@
 {
     if(![self _hasValidWorkspace]) return;
     
-    [[XBookmarkModel sharedModel]loadOnceBookmarks];
+    [[XBookmarkModel sharedModel] loadOnceBookmarks];
     
     IDESourceCodeEditor* editor = [XBookmarkUtil currentEditor];
     if ([editor isKindOfClass:[IDEEditorEmpty class]]) {
